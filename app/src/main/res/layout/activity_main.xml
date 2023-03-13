@@ -6,13 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_puzzle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="10"
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_puzzle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="4"
+            tools:itemCount="16"
+            tools:listitem="@layout/item_image" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tv_puzzle_piece"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/puzzle_piece"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="Bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/cv_puzzle"
+        app:layout_constraintTop_toBottomOf="@id/cv_puzzle" />
+
+    <TextView
+        android:id="@+id/tv_puzzle_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/puzzle_contents"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_puzzle_piece"
+        app:layout_constraintTop_toBottomOf="@id/tv_puzzle_piece" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/background"
+        android:clipToPadding="false"
+        android:paddingStart="10dp"
+        tools:itemCount="16"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_puzzle_content"
+        tools:listitem="@layout/item_puzzle_piece" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

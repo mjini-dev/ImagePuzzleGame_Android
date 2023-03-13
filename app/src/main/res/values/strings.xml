@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ImagePuzzleGame</string>
+
+
+    <string name="puzzle_piece">퍼즐 조각</string>
+    <string name="puzzle_contents">조각을 꾹 눌러서 위 퍼즐판에 넣고 뺄 수 있어요!</string>
 </resources>
