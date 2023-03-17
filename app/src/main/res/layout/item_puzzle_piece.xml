@@ -14,6 +14,7 @@
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background"
+        android:stateListAnimator="@animator/hover_effect"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintLeft_toLeftOf="parent"
