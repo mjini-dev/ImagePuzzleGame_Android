@@ -1,65 +1,58 @@
 package com.mjin.imagepuzzlegame
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mjin.imagepuzzlegame.databinding.ItemPuzzlePieceBinding
+import com.mjin.imagepuzzlegame.model.Piece
 
-class PieceAdapter(private val onPieceClickListener: OnPieceClickListener) :
-    ListAdapter<Bitmap, PieceAdapter.PieceViewHolder>(PieceItemCallback()) {
+class PieceAdapter(
+    private val onPieceLongClickListener: OnPieceLongClickListener
+) :
+    ListAdapter<Piece, PieceAdapter.PieceViewHolder>(PieceItemCallback()) {
 
 
-//    val items = ArrayList<Bitmap>()
-
-    interface OnPieceClickListener {
-        fun onPieceClicked(items: Bitmap)
+    interface OnPieceLongClickListener {
+        fun onPieceLongClicked(items: Piece, view: View)
     }
 
 
     inner class PieceViewHolder(val binding: ItemPuzzlePieceBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        val parent = binding.root
-        val context: Context = parent.context
+        fun bind(piece: Piece) {
+            itemView.setOnLongClickListener {
+                it.tag = ""+piece.pX+","+piece.pY
+                onPieceLongClickListener.onPieceLongClicked(piece,it)
 
-        fun bind(bitmap: Bitmap) {
-
-            itemView.setOnClickListener {
-                onPieceClickListener.onPieceClicked(bitmap)
-                Log.d("TAG", "piece item clicked")
+                return@setOnLongClickListener true
             }
 
             binding.apply {
-
-                ivPiece.setImageBitmap(bitmap)
+                ivPiece.setImageBitmap(piece.bitmap)
 
             }
-
         }
-
     }
 
 
-    class PieceItemCallback : DiffUtil.ItemCallback<Bitmap>() {
+    class PieceItemCallback : DiffUtil.ItemCallback<Piece>() {
         override fun areItemsTheSame(
-            oldItem: Bitmap,
-            newItem: Bitmap
+            oldItem: Piece,
+            newItem: Piece
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.bitmap == newItem.bitmap
         }
 
         override fun areContentsTheSame(
-            oldItem: Bitmap,
-            newItem: Bitmap
+            oldItem: Piece,
+            newItem: Piece
         ): Boolean {
-            return oldItem.sameAs(newItem)
+            return oldItem == newItem
         }
-
     }
 
 
